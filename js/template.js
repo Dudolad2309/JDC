@@ -5,7 +5,7 @@
 
 		// Fixed header
 		//-----------------------------------------------
-		$(window).scroll(function () {
+		let scroll = $(window).scroll(function () {
 			if (($(".header.fixed").length > 0)) {
 				if (($(this).scrollTop() > 0) && ($(window).width() > 767)) {
 					$("body").addClass("fixed-header-on");
@@ -13,7 +13,7 @@
 					$("body").removeClass("fixed-header-on");
 				}
 			}
-			;
+
 		});
 
 		$(window).load(function () {
@@ -24,7 +24,7 @@
 					$("body").removeClass("fixed-header-on");
 				}
 			}
-			;
+
 		});
 
 		//Scroll Spy
@@ -41,15 +41,16 @@
 		//-----------------------------------------------
 		if ($(".smooth-scroll").length > 0) {
 			$('.smooth-scroll a[href*=#]:not([href=#]), a[href*=#]:not([href=#]).smooth-scroll').click(function () {
-				if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-					var target = $(this.hash);
-					target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-					if (target.length) {
-						$('html,body').animate({
-							scrollTop: target.offset().top - 151
-						}, 1000);
-						return false;
-					}
+				if (!(location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname)) {
+					return;
+				}
+				let target = $(this.hash);
+				target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+				if (target.length) {
+					$('html,body').animate({
+						scrollTop: target.offset().top - 151
+					}, 1000);
+					return false;
 				}
 			});
 		}
